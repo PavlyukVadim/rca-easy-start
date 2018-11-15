@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   simpleAction,
   asyncActionWithThunk,
+  incrementAction,
 } from './actions'
 
 import logo from './assets/logo.svg';
@@ -13,9 +14,13 @@ class App extends Component {
     this.props.simpleAction();
   }
 
+  increment = () => {
+    this.props.increment()
+  }
+
   componentDidMount() {
     const { asyncAction } = this.props
-    asyncAction()
+    asyncAction({payload: 'payload'})
   }
 
   render() {
@@ -31,6 +36,7 @@ class App extends Component {
            }
           </pre>
           <button onClick={this.simpleAction}>Test redux action</button>
+          <button onClick={this.increment}> + </button>
         </header>
       </div>
     );
@@ -44,6 +50,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   simpleAction: () => dispatch(simpleAction()),
   asyncAction: () => dispatch(asyncActionWithThunk()),
+  increment: () => dispatch(incrementAction()),
 });
 
 export default connect(

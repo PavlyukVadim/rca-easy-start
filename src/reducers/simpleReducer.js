@@ -4,6 +4,10 @@ export default (state = {}, action) => {
       return {
         result: action.payload
       }
+    case 'INCREMENT':
+      return {
+        result: 1
+      }
     default:
       return state
   }
