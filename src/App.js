@@ -18,6 +18,14 @@ class App extends Component {
     this.props.increment()
   }
 
+  getUser = () => {
+    this.props.getUser()
+  }
+
+  createUser = () => {
+    this.props.createUser()
+  }
+
   componentDidMount() {
     const { asyncAction } = this.props
     asyncAction({payload: 'payload'})
@@ -37,6 +45,8 @@ class App extends Component {
           </pre>
           <button onClick={this.simpleAction}>Test redux action</button>
           <button onClick={this.increment}> + </button>
+          <button onClick={this.getUser}> get </button>
+          <button onClick={this.createUser}> create </button>
         </header>
       </div>
     );
@@ -51,6 +61,8 @@ const mapDispatchToProps = (dispatch) => ({
   simpleAction: () => dispatch(simpleAction()),
   asyncAction: () => dispatch(asyncActionWithThunk()),
   increment: () => dispatch(incrementAction()),
+  getUser: () => dispatch({type: 'GET_USER', id: 2}),
+  createUser: () => dispatch({type: 'CREATE_USER'}),
 });
 
 export default connect(
