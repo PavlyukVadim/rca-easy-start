@@ -1,12 +1,9 @@
-import axios from 'axios'
-import { call, put } from 'redux-saga/effects'
-
-export const gotAsyncData = (data) => (
-  {
-    type: 'GOT_DATA_ACTION',
-    data,
-  }
-)
+// export const gotAsyncData = (data) => (
+//   {
+//     type: 'GOT_DATA_ACTION',
+//     data,
+//   }
+// )
 
 // function fetchFakeApi(actionPayload) {
 //   console.log('actionPayload', actionPayload)

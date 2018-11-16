@@ -1,5 +1,3 @@
-export const incrementAction = () => (
-  {
-    type: 'INCREMENT_ASYNC',
-  }
-)
+export const incrementAction = () => ({
+  type: 'INCREMENT_ASYNC',
+})

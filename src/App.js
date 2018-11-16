@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   simpleAction,
-  asyncActionWithThunk,
   incrementAction,
+  getUser,
+  createUser,
 } from './actions'
 
 import logo from './assets/logo.svg';
@@ -19,16 +20,21 @@ class App extends Component {
   }
 
   getUser = () => {
-    this.props.getUser()
+    this.props.getUser(2)
   }
 
   createUser = () => {
-    this.props.createUser()
+    const user = {
+      title: 'foo',
+      body: 'bar',
+      userId: 1
+    }
+    this.props.createUser(user)
   }
 
   componentDidMount() {
-    const { asyncAction } = this.props
-    asyncAction({payload: 'payload'})
+    const { getUser } = this.props
+    getUser(1)
   }
 
   render() {
@@ -38,15 +44,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           {/*<img src={logo} className="App-logo" alt="logo" />*/}
-          <pre>
-           {
-             JSON.stringify(this.props)
-           }
-          </pre>
+          <pre>{JSON.stringify(this.props)}</pre>
           <button onClick={this.simpleAction}>Test redux action</button>
-          <button onClick={this.increment}> + </button>
-          <button onClick={this.getUser}> get </button>
-          <button onClick={this.createUser}> create </button>
+          <button onClick={this.increment}> async + </button>
+          <button onClick={this.getUser}> get user with id 2 </button>
+          <button onClick={this.createUser}> create custom user </button>
         </header>
       </div>
     );
@@ -59,10 +61,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   simpleAction: () => dispatch(simpleAction()),
-  asyncAction: () => dispatch(asyncActionWithThunk()),
   increment: () => dispatch(incrementAction()),
-  getUser: () => dispatch({type: 'GET_USER', id: 2}),
-  createUser: () => dispatch({type: 'CREATE_USER'}),
+  getUser: (id) => dispatch(getUser(id)),
+  createUser: (user) => dispatch(createUser(user)),
 });
 
 export default connect(
